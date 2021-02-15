@@ -11,7 +11,7 @@ import com.example.hrpayroll.feignclients.WorkerFeignClient;
 @Service
 public class PaymentService {
 	
-	//faz a conexão entre dois ou mais projetos existentes
+	//faz a conexão entre dois ou mais projetos existentes no caso o worker
 	@Autowired
 	private WorkerFeignClient workerFeignClient;
 	
