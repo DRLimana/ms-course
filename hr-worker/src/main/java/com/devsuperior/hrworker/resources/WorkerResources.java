@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,9 @@ public class WorkerResources {
 	
 	private static Logger logger = org.slf4j.LoggerFactory.getLogger(WorkerResources.class);
 	
+	@Value("${test.config}")
+	private String testConfig;
+	
 	//informações sobre o contexto da aplicação, variaveis de informacoes.
 	@Autowired
 	private Environment env;
@@ -28,6 +32,12 @@ public class WorkerResources {
 	//acessa o banco de dados
 	@Autowired
 	private WorkerRepository repository;
+	
+	@GetMapping(value = "/configs")
+	public ResponseEntity<Void> getConfigs(){
+		logger.info("CONFIG = "+testConfig);
+		return ResponseEntity.noContent().build();
+	}
 	
 	@GetMapping
 	public ResponseEntity<List<Worker>> findAll(){
